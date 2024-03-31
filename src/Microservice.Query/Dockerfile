@@ -1,16 +1,16 @@
-FROM mcr.microsoft.com/dotnet/sdk:latest AS build-env
+FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:latest AS build-env
 WORKDIR /app
 
 # Copia el csproj y restaura las dependencias separadamente para aprovechar la caché de las capas del Docker
-COPY ./Microservice.Query/Infra.Data.Query.csproj ./Microservice.Query/
-RUN dotnet restore "./Microservice.Query/Infra.Data.Query.csproj"
+COPY ./Infra.Data.Query/Infra.Data.Query.csproj ./Infra.Data.Query/
+RUN dotnet restore "./Infra.Data.Query/Infra.Data.Query.csproj"
 
 # Copia el resto de los archivos y construye la aplicación
-COPY ./Microservice.Query/ ./
-RUN dotnet publish "./Microservice.Query/Infra.Data.Query.csproj" -c Release -o out
+COPY ./Infra.Data.Query/ ./
+RUN dotnet publish "./Infra.Data.Query/Infra.Data.Query.csproj" -c Release -o out
 
 # Genera la imagen de runtime
-FROM mcr.microsoft.com/dotnet/aspnet:latest
+FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:latest
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "Infra.Data.Query.dll"]
