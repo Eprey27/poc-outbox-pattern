@@ -1,0 +1,42 @@
+# Ignore build output
+/build/
+
+# Ignore IDE specific files
+.idea/
+.vscode/
+
+# Ignore dependencies
+/node_modules/
+
+# Ignore compiled binaries
+/bin/
+/obj/
+*.dll
+*.exe
+*.pdb
+
+# Ignore cache files
+*.cache
+
+# Ignore NuGet packages
+*.nupkg
+
+# Ignore user-specific files
+*.user
+
+# Ignore logs
+*.log
+
+# Ignore cache files
+*.cache
+
+# Ignore temporary files
+*.tmp
+
+# Ignore Visual Studio files
+*.suo
+*.sln
+*.csproj.user
+
+# Ignore environment files
+*.env*
